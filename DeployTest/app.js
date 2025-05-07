@@ -58,10 +58,7 @@ app.post("/contatos", async (req, res) => {
 
 // Iniciar o servidor na porta 3000
 const PORT = process.env.PORT || 3000;
-app.listen(3000, () => {
-  if (PORT == 3000) {
-    console.log("Servidor rodando na porta 3000");
-  } else {
-    console.log("Servidor rodando na porta " + PORT);
-  }
+app.listen(PORT, () => {
+  console.log("Servidor rodando na porta " + PORT);
 });
+
