@@ -8,7 +8,7 @@ function Contato() {
   const handleSubmit = () => {
     const contato = { numero, nome, email }; // Coleta os dados do formulário
 
-    fetch("http://localhost:3000/contatos", {
+    fetch("https://deploytest-0j1w.onrender.com/contatos", {
       method: "POST", // Envia os dados com POST
       headers: {
         "Content-Type": "application/json", // Informa que os dados são JSON
