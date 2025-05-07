@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 function Manage() {
   const [contatos, setContatos] = useState([]);
-
+  const apiUrl = "https://seuapp.render.com";
   useEffect(() => {
-    fetch("http://localhost:3000/contatos")
+    fetch(`${apiUrl}/contatos`)
       .then((res) => res.json())
       .then((data) => setContatos(data))
       .catch((err) => console.error("Erro ao carregar contatos:", err));
