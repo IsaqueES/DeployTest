@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function Manage() {
   const [contatos, setContatos] = useState([]);
-  const apiUrl = "https://seuapp.render.com";
+  const apiUrl = "https://deploytest-0j1w.onrender.com";
   useEffect(() => {
     fetch(`${apiUrl}/contatos`)
       .then((res) => res.json())
