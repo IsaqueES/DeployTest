@@ -3,7 +3,6 @@ import Home from "./Home.jsx";
 import Contato from "./Contato.jsx";
 import Manage from "./Manage.jsx";
 
-
 function App() {
   return (
     <div>
@@ -25,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contato" element={<Contato />} />
         <Route path="/manage" element={<Manage />} />
+        <Route path="/contato/:email" element={<Contato />} />
       </Routes>
     </div>
   );

@@ -7,7 +7,7 @@
     "react": "vite",
     "start": "react-scripts start",
     "api": "node app.js",
-    "dev": "concurrently \"npm run react\" \"npm run api\"",
+    "dev": "concurrently --prefix name --names \"FRONT,BACK\" \"npm run react\" \"npm run api\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

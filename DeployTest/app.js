@@ -1,8 +1,9 @@
 // server.js
 import express from "express";
 import cors from "cors";
-import {sequelize} from "./Data/dados.js"; // Importa a conexão com o banco de dados
-import {Contato} from "./Data/dados.js"; // Importa o modelo de Contato'
+import { sequelize } from "./Data/dados.js"; // Importa a conexão com o banco de dados
+import { Contato } from "./Data/dados.js"; // Importa o modelo de Contato'
+import chalk from "chalk";
 
 // Inicialização do Express
 const app = express();
@@ -15,12 +16,11 @@ app.use(express.json()); // Permite que o Express entenda o corpo da requisiçã
 sequelize
   .sync()
   .then(() => {
-    console.log("Banco de dados sincronizado!");
+    console.log(chalk.bgGreen("Banco de dados sincronizado!"));
   })
   .catch((err) => {
     console.error("Erro ao sincronizar banco de dados:", err);
   });
-
 
 // Rota GET para listar todos os contatos
 app.get("/contatos", async (req, res) => {
@@ -38,7 +38,7 @@ app.post("/contatos", async (req, res) => {
 
   // Validação simples
   if (!numero || !nome || !email) {
-    return res.status(400).json({ erro: "Todos os campos são obrigatórios." });
+    return res("TESTE");
   }
 
   try {
@@ -55,9 +55,28 @@ app.post("/contatos", async (req, res) => {
     return res.status(500).json({ erro: "Erro ao salvar contato." });
   }
 });
+app.delete("/contatos/:email", async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    // Deletar o contato pelo email
+    const contatoDeletado = await Contato.destroy({
+      where: { email },
+    });
+
+    if (contatoDeletado) {
+      return res.status(200).json({ sucesso: true });
+    } else {
+      return res.status(404).json({ erro: "Contato não encontrado." });
+    }
+  } catch (err) {
+    console.error("Erro ao deletar contato:", err);
+    return res.status(500).json({ erro: "Erro ao deletar contato." });
+  }
+});
 
 // Iniciar o servidor na porta 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log("Servidor rodando na porta " + PORT);
+  console.log(chalk.bgGreen("Servidor rodando na porta " + PORT));
 });
